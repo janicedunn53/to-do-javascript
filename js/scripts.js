@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     var newTaskDescription = $("input#new-task-description").val();
     var newTaskList = $("select#list-select").val();
-    var newTask = { description: newTaskDescription, list: newTaskList };
+    var newTask = { description: newTaskDescription, list: newTaskList, completed: false };
     lists[newTaskList].tasks.push(newTask);
 
     $('ul#tasks').append('<li><span class="task">' + newTask.description + "</span></li>")
@@ -16,6 +16,16 @@ $(document).ready(function() {
       $("#show-task").fadeIn();
       $("#show-task h2").text(newTask.description);
       $(".assigned-list").text(newTask.list);
+
+      $(".task-completed").last().click(function() {
+        this.checked = !newTask.completed;
+        newTask.completed = !newTask.completed;
+        if (newTask.completed) {
+          $("#show-task h2").html('<del>' + newTask.description + '</del>')
+        } else {
+          $("#show-task h2").html(newTask.description);
+        }
+      });
     });
 
     $("input#new-task-description").val("");
