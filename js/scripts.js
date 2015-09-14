@@ -1,10 +1,6 @@
-var lists = {'exampleList' : {name: 'exampleList', tasks: []} };
+var lists = {};
 
 $(document).ready(function() {
-  showLists();
-  for (var listName in lists) {
-    $('ul#lists').append('<li><span class="list">' + listName + "</span></li>")
-  }
 
   $("form#new-task").submit(function(event) {
     event.preventDefault();
@@ -38,9 +34,9 @@ $(document).ready(function() {
     $(".list").last().click(function() {
       $("#show-list").fadeIn();
       $("#show-list h2").text(newList.name);
+      $("#list-tasks").html("");
       newList.tasks.forEach(function(task) {
-        console.log(task.description)
-        $(".list-tasks").text(task.description);
+        $("#list-tasks").append("<li>" + task.description + "</li>");
       });
     });
 
